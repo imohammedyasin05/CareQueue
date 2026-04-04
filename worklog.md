@@ -117,3 +117,28 @@ Stage Summary:
 - All 4 pages accessible via navbar navigation
 - APIs verified: POST /api/predict, GET /api/history, full CRUD /api/doctors
 - Production-ready, hackathon-demo quality
+
+---
+Task ID: 5
+Agent: Main Orchestrator
+Task: Generate Design Document and Tech Stack Document for CareQueue
+
+Work Log:
+- Read all source files to extract accurate design specifications and tech details
+- Updated footer copyright year from 2025 to 2026
+- Created Design Document (22KB, ~15 pages) using docx-js with Midnight Code palette
+  - 9 sections: Design Philosophy, Color System, Typography, Layout, Components, Page Designs, Animations, Iconography, Custom Styles
+  - 6 professional tables with color swatches, type scale, layout patterns
+  - Cover page, TOC with placeholders, back cover
+- Created Tech Stack Document (22KB, ~14 pages) using docx-js with Midnight Code palette
+  - 9 sections: Architecture, Frontend Stack, Backend Stack, Database, AI Engine, Dependencies, Dev Tools, Deployment, Future Scaling
+  - 8 professional tables with version numbers, WHY explanations for each technology
+  - Cover page, TOC with placeholders, back cover
+- Added TOC placeholders to both documents for first-open experience
+
+Stage Summary:
+- Two professional documents generated in /download/
+  - CareQueue_Design_Document_v1.0.docx (Design specification)
+  - CareQueue_TechStack_Document_v1.0.docx (Technology architecture)
+- Footer updated to © 2026
+- Documents are detailed enough for AI tools (v0.dev, Bolt.new) to generate exact UI

@@ -45,7 +45,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
           {/* Right - Copyright */}
           <p className="text-xs text-text-muted text-center md:text-right">
-            &copy; 2025 CareQueue. All rights reserved.
+            &copy; 2026 CareQueue. All rights reserved.
           </p>
         </div>
       </div>
