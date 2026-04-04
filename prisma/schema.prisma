@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Prediction {
+  id                  String   @id @default(cuid())
+  patients            Int
+  doctors             Int
+  avgConsultationTime Int
+  estimatedWaitTime   Float
+  queueStatus         String   // Low, Medium, High
+  timestamp           DateTime @default(now())
+}
+
+model Doctor {
+  id         String   @id @default(cuid())
+  name       String
+  specialty  String
+  status     String   @default("Available") // Available, Busy, Offline
+  patientsToday Int  @default(0)
+  maxPatients   Int  @default(20)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
