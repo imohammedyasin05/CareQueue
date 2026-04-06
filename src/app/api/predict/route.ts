@@ -1,82 +1,53 @@
-import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { NextResponse } from 'next/server';
+import { db } from '@/lib/db';
 
-export async function POST(request: NextRequest) {
+export async function POST(req: Request) {
   try {
-    const body = await request.json();
+    const body = await req.json();
     const { patients, doctors, avgConsultationTime } = body;
 
-    // Validate all inputs are present
-    if (
-      patients === undefined ||
-      doctors === undefined ||
-      avgConsultationTime === undefined
-    ) {
+    // 1. Validate Input
+    if (patients === undefined || doctors === undefined || avgConsultationTime === undefined) {
       return NextResponse.json(
-        { error: "Missing required fields: patients, doctors, avgConsultationTime" },
+        { error: 'Missing required fields: patients, doctors, avgConsultationTime' },
         { status: 400 }
       );
     }
 
-    // Validate all inputs are positive integers
-    if (
-      !Number.isInteger(patients) ||
-      !Number.isInteger(doctors) ||
-      !Number.isInteger(avgConsultationTime)
-    ) {
+    if (typeof doctors !== 'number' || doctors <= 0) {
       return NextResponse.json(
-        { error: "All inputs must be integers" },
+        { error: 'Doctors must be a valid number greater than 0' },
         { status: 400 }
       );
     }
 
-    if (patients <= 0 || doctors <= 0 || avgConsultationTime <= 0) {
-      return NextResponse.json(
-        { error: "All inputs must be positive integers" },
-        { status: 400 }
-      );
+    // 2. Logic: wait_time = (patients / doctors) * avgConsultationTime
+    const estimatedWaitTime = Number(((patients / doctors) * avgConsultationTime).toFixed(1));
+
+    let queueStatus = 'Low';
+    if (estimatedWaitTime > 60) {
+      queueStatus = 'High';
+    } else if (estimatedWaitTime > 30) {
+      queueStatus = 'Medium';
     }
 
-    // Calculate wait time in minutes
-    const estimatedWaitTime = (patients / doctors) * avgConsultationTime;
-
-    // Determine queue status
-    let queueStatus: string;
-    if (estimatedWaitTime <= 15) {
-      queueStatus = "Low";
-    } else if (estimatedWaitTime <= 45) {
-      queueStatus = "Medium";
-    } else {
-      queueStatus = "High";
-    }
-
-    // Save prediction to database
-    const prediction = await db.prediction.create({
+    // 3. Save to Supabase DB using Prisma
+    const predictionRecord = await db.prediction.create({
       data: {
         patients,
         doctors,
         avgConsultationTime,
-        estimatedWaitTime: Math.round(estimatedWaitTime * 100) / 100,
+        estimatedWaitTime,
         queueStatus,
       },
     });
 
+    // 4. Return the record directly
+    return NextResponse.json(predictionRecord, { status: 201 });
+  } catch (error: any) {
+    console.error('Prediction API Error:', error);
     return NextResponse.json(
-      {
-        id: prediction.id,
-        estimatedWaitTime: prediction.estimatedWaitTime,
-        queueStatus: prediction.queueStatus,
-        patients: prediction.patients,
-        doctors: prediction.doctors,
-        avgConsultationTime: prediction.avgConsultationTime,
-        timestamp: prediction.timestamp,
-      },
-      { status: 201 }
-    );
-  } catch (error) {
-    console.error("Prediction error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
+      { error: 'Internal server error while creating prediction', details: error.message },
       { status: 500 }
     );
   }
