@@ -1,0 +1,32 @@
+▲ Next.js 16.2.2 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.29.155:3000
+- Environments: .env
+✓ Ready in 1516ms
+
+ GET / 200 in 2.5s (next.js: 624ms, application-code: 1830ms)
+○ Compiling /_not-found/page ...
+prisma:query SELECT `main`.`Prediction`.`id`, `main`.`Prediction`.`patients`, `main`.`Prediction`.`doctors`, `main`.`Prediction`.`avgConsultationTime`, `main`.`Prediction`.`estimatedWaitTime`, `main`.`Prediction`.`queueStatus`, `main`.`Prediction`.`timestamp` FROM `main`.`Prediction` WHERE 1=1 ORDER BY `main`.`Prediction`.`timestamp` DESC LIMIT ? OFFSET ?
+ GET /api/history 200 in 7.2s (next.js: 2.2s, application-code: 5.0s)
+ GET /sw.js 404 in 8.2s (next.js: 6.9s, application-code: 1371ms)
+prisma:query INSERT INTO `main`.`Prediction` (`id`, `patients`, `doctors`, `avgConsultationTime`, `estimatedWaitTime`, `queueStatus`, `timestamp`) VALUES (?,?,?,?,?,?,?) RETURNING `id` AS `id`, `patients` AS `patients`, `doctors` AS `doctors`, `avgConsultationTime` AS `avgConsultationTime`, `estimatedWaitTime` AS `estimatedWaitTime`, `queueStatus` AS `queueStatus`, `timestamp` AS `timestamp`
+ POST /api/predict 201 in 173ms (next.js: 120ms, application-code: 53ms)
+prisma:query SELECT `main`.`Prediction`.`id`, `main`.`Prediction`.`patients`, `main`.`Prediction`.`doctors`, `main`.`Prediction`.`avgConsultationTime`, `main`.`Prediction`.`estimatedWaitTime`, `main`.`Prediction`.`queueStatus`, `main`.`Prediction`.`timestamp` FROM `main`.`Prediction` WHERE 1=1 ORDER BY `main`.`Prediction`.`timestamp` DESC LIMIT ? OFFSET ?
+ GET /api/history 200 in 199ms (next.js: 110ms, application-code: 88ms)
+prisma:query SELECT `main`.`Prediction`.`id`, `main`.`Prediction`.`patients`, `main`.`Prediction`.`doctors`, `main`.`Prediction`.`avgConsultationTime`, `main`.`Prediction`.`estimatedWaitTime`, `main`.`Prediction`.`queueStatus`, `main`.`Prediction`.`timestamp` FROM `main`.`Prediction` WHERE 1=1 ORDER BY `main`.`Prediction`.`timestamp` DESC LIMIT ? OFFSET ?
+ GET /api/history 200 in 231ms (next.js: 27ms, application-code: 204ms)
+prisma:query SELECT `main`.`Doctor`.`id`, `main`.`Doctor`.`name`, `main`.`Doctor`.`specialty`, `main`.`Doctor`.`status`, `main`.`Doctor`.`patientsToday`, `main`.`Doctor`.`maxPatients`, `main`.`Doctor`.`createdAt`, `main`.`Doctor`.`updatedAt` FROM `main`.`Doctor` WHERE 1=1 ORDER BY `main`.`Doctor`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/doctors 200 in 277ms (next.js: 200ms, application-code: 77ms)
+prisma:query SELECT 1
+prisma:query INSERT INTO `main`.`Doctor` (`id`, `name`, `specialty`, `status`, `patientsToday`, `maxPatients`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?,?) RETURNING `id` AS `id`, `name` AS `name`, `specialty` AS `specialty`, `status` AS `status`, `patientsToday` AS `patientsToday`, `maxPatients` AS `maxPatients`, `createdAt` AS `createdAt`, `updatedAt` AS `updatedAt`
+ POST /api/doctors 201 in 127ms (next.js: 25ms, application-code: 102ms)
+prisma:query SELECT `main`.`Doctor`.`id`, `main`.`Doctor`.`name`, `main`.`Doctor`.`specialty`, `main`.`Doctor`.`status`, `main`.`Doctor`.`patientsToday`, `main`.`Doctor`.`maxPatients`, `main`.`Doctor`.`createdAt`, `main`.`Doctor`.`updatedAt` FROM `main`.`Doctor` WHERE 1=1 ORDER BY `main`.`Doctor`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/doctors 200 in 47ms (next.js: 15ms, application-code: 33ms)
+ GET / 200 in 1204ms (next.js: 105ms, application-code: 1099ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`Doctor`.`id`, `main`.`Doctor`.`name`, `main`.`Doctor`.`specialty`, `main`.`Doctor`.`status`, `main`.`Doctor`.`patientsToday`, `main`.`Doctor`.`maxPatients`, `main`.`Doctor`.`createdAt`, `main`.`Doctor`.`updatedAt` FROM `main`.`Doctor` WHERE 1=1 ORDER BY `main`.`Doctor`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`Prediction`.`id`, `main`.`Prediction`.`patients`, `main`.`Prediction`.`doctors`, `main`.`Prediction`.`avgConsultationTime`, `main`.`Prediction`.`estimatedWaitTime`, `main`.`Prediction`.`queueStatus`, `main`.`Prediction`.`timestamp` FROM `main`.`Prediction` WHERE 1=1 ORDER BY `main`.`Prediction`.`timestamp` DESC LIMIT ? OFFSET ?
+ GET /api/doctors 200 in 734ms (next.js: 390ms, application-code: 344ms)
+ GET /api/history 200 in 779ms (next.js: 665ms, application-code: 114ms)
+ GET /sw.js 404 in 1116ms (next.js: 98ms, application-code: 1019ms)
+ GET /sw.js 404 in 750ms (next.js: 171ms, application-code: 579ms)
